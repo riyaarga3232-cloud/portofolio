@@ -5,26 +5,38 @@ body {
 }
 
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     background-color: rgba(4, 0, 255, 0.548);
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
-
-}
+    align-items: center;
+    padding: 1rem 5%; /* Ubah dari 2rem ke 5% */
+    box-sizing: border-box; /* PENTING! */
+    pointer-events: auto !important;
+}     
 
 nav ul {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem; /* Kurangi dari 2rem ke 1.5rem */
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
+/* HAPUS atau COMMENT baris ini */
+/*
 nav ul li:last-of-type {
     padding-bottom: 8px;
 }
+*/
 
 nav div img {
-    width: 50px;
+    width: 35px;
 }
 
 nav ul li a {
@@ -35,6 +47,34 @@ nav ul li a {
     padding: 0;
     transition: all 300ms ease-in-out;
     border-bottom: 1px solid rgba(255, 68, 0, 0);
+    white-space: nowrap; /* Tambahkan ini - mencegah text wrap */
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 1024px) {
+    nav ul {
+        gap: 1rem;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 2%;
+    }
+    
+    nav ul {
+        gap: 0.8rem;
+    }
+    
+    nav ul li a {
+        font-size: 13px;
+    }
 }
 
 .logo {
@@ -45,8 +85,8 @@ nav ul li a {
 
 /* hero */
 .hero {
-    padding-top: 80px;
-    padding-bottom: 40px;
+    padding-top: 150px;
+    padding-bottom: 50px;
     min-height: auto;
     display: flex;
     flex-direction: column;
@@ -55,12 +95,23 @@ nav ul li a {
 
 
 .avatar {
-    width: 120px;
-    height: 120Spx;
+    width: 180px;
+    height: 180px;
     object-fit: cover;
+    object-position: center top; /* Fokus ke bagian atas jika ada wajah */
     border-radius: 50%;
-    border: 4px solid #7e22ce;
-    box-shadow: 0 0 20px #7e22ce88;
+    border: 5px solid #7e22ce;
+    box-shadow: 
+        0 0 30px rgba(126, 34, 206, 0.6),
+        0 0 60px rgba(126, 34, 206, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.05); /* Efek zoom saat hover */
+    box-shadow: 
+        0 0 40px rgba(126, 34, 206, 0.8),
+        0 0 80px rgba(126, 34, 206, 0.4);
 }
 
 /* Typing */
@@ -128,6 +179,17 @@ nav ul li a {
 @media (max-width: 768px) {
     .nav-links {
         display: none;
+    }
+     nav {
+        padding: 1rem;
+    }
+    
+    nav ul {
+        gap: 1rem; /* Kurangi gap di mobile */
+    }
+    
+    nav ul li a {
+        font-size: 14px; /* Kecilkan font di mobile */
     }
 }
 
@@ -556,4 +618,43 @@ projects-section {
   .contact-info {
     text-align: center;
   }
+}
+
+
+/* Loading Screen */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#loader p {
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+#main-content {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#main-content.show {
+    opacity: 1;
 }
